@@ -68,4 +68,11 @@ h1 {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
 }
+#chart_div > div{
+  bottom: 50px;
+}
+#chart_div > .text-muted, #chart_div h4 {
+  position: relative;
+  z-index: 1000;
+}
 
