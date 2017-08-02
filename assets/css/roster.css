@@ -1,0 +1,7 @@
+.bg-coral{
+	background: #ff5e62;
+	color: whitesmoke;
+}
+.bg-coral .card-subtitle {
+	color: lightgreen;
+}

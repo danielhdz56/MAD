@@ -14,7 +14,6 @@ var ref = firebase.database().ref('users');
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     //User is signed in.
-
     profilePhoto = user.photoURL;
     uid = user.uid;
     if(user.displayName !== null){
@@ -23,6 +22,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     if(profilePhoto === null){
       $('#profileImage').attr('src', 'assets/images/defaultProfilePhoto.png')
     }
+    //Checking for user information and loading it on the page
     ref.child(uid).on('child_added', function(snapshot){
       if(snapshot.val().bio === undefined || snapshot.val().bio === ""){
         $('#formBioTextarea').attr('placeholder', "Tell us a little bit about yourself");
@@ -30,10 +30,8 @@ firebase.auth().onAuthStateChanged(function(user) {
       else {
         $('#formBioTextarea').html(snapshot.val().bio)
       }
-    })
-
-
-
+    });
+    //Makes changes to profile
     $('#updateProfileBtn').on('click', function(){
       event.preventDefault();
       var name = $('#formNameInput').val().trim();
