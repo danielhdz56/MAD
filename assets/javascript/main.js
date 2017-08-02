@@ -33,6 +33,8 @@ firebase.auth().onAuthStateChanged(function(user) {
 });
 
 
+
+
 // var refRoster = firebase.database().ref('roster');
 // var refGrades = firebase.database().ref('grades');
 // var grades = [];
