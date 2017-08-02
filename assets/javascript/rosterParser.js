@@ -3,6 +3,11 @@ var stepped = 0, rowCount = 0, errorCount = 0, firstError;
 var start, end;
 var firstRun = true;
 var maxUnparseLength = 10000;
+var dataFromCSV;
+var columns;
+var rows = [];
+var result;
+var dataToSend;
 
 $(function()
 {
@@ -143,7 +148,26 @@ function completeFn(results)
 
 	printStats("Parse complete");
 	console.log("    Results:", results);
-
+	//How I update to firebase database
+	dataFromCSV = {
+		roster: results.data
+	}
+	columns = dataFromCSV.roster[0];
+	for(i=1;i<dataFromCSV.roster.length;i++){
+		rows.push(dataFromCSV.roster[i])
+	}
+	result = rows.map(function(row) {
+	  return row.reduce(function(result, field, index) {
+	    result[columns[index]] = field;
+	    return result;
+	  }, {});
+	});
+	dataToSend = result.reduce((prev, current) => { prev[current.ID] = current; return prev; }, {});
+	dataToSend = {
+		roster: dataToSend
+	}
+	
+	ref.update(dataToSend);
 	// icky hack
 	setTimeout(enableButton, 100);
 }
