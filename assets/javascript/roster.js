@@ -16,10 +16,6 @@ firebase.auth().onAuthStateChanged(function(user) {
 	email = user.email;
 	emailVerified = user.emailVerified;
 	uid = user.uid;
-    console.log(email);
-    console.log(emailVerified);
-    console.log(uid);
-    console.log(user);
     ref.child(uid).on('value', function(snapshot){
     	console.log(snapshot.val());
     });
