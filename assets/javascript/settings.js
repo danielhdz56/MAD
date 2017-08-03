@@ -9,21 +9,24 @@ messagingSenderId: "445214233554"
 };
 firebase.initializeApp(config);
 var uid;
-var ref = firebase.database().ref('users');
+var ref = firebase.database().ref('users/'+uid);
 
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     //User is signed in.
     profilePhoto = user.photoURL;
     uid = user.uid;
+    var ref = firebase.database().ref('users/'+uid);
+
     if(user.displayName !== null){
       $('#formNameInput').attr('value', user.displayName);
     }
     if(profilePhoto === null){
       $('#profileImage').attr('src', 'assets/images/defaultProfilePhoto.png')
+      $('#updateImage').attr('src', 'assets/images/defaultProfilePhoto.png')
     }
     //Checking for user information and loading it on the page
-    ref.child(uid).on('child_added', function(snapshot){
+    ref.on('child_added', function(snapshot){
       if(snapshot.val().bio === undefined || snapshot.val().bio === ""){
         $('#formBioTextarea').attr('placeholder', "Tell us a little bit about yourself");
       }
