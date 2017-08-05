@@ -48,7 +48,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
         // Push to child path.
         // [START oncomplete]
-        refStorage.child(uid + '/' + file.name).put(file, metadata).then(function(snapshot) {
+        refStorage.child(uid + '/images/' + file.name).put(file, metadata).then(function(snapshot) {
           url = snapshot.downloadURL;
           var profile = {
             image: {
@@ -69,6 +69,8 @@ firebase.auth().onAuthStateChanged(function(user) {
       }
         document.getElementById('file').addEventListener('change', handleFileSelect, false);
         document.getElementById('file').disabled = true;
+
+
     //Checking for user information and loading it on the page
     ref.on('child_added', function(snapshot){
       if(snapshot.val().bio === undefined || snapshot.val().bio === ""){
