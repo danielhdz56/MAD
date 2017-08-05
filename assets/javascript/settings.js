@@ -1,35 +1,78 @@
 // Initialize Firebase
 var config = {
-apiKey: "AIzaSyAJNS71JJNa_k3bKMuSS-SqUeHRFik_8QE",
-authDomain: "madproject-2c3b4.firebaseapp.com",
-databaseURL: "https://madproject-2c3b4.firebaseio.com",
-projectId: "madproject-2c3b4",
-storageBucket: "madproject-2c3b4.appspot.com",
-messagingSenderId: "445214233554"
+  apiKey: "AIzaSyAJNS71JJNa_k3bKMuSS-SqUeHRFik_8QE",
+  authDomain: "madproject-2c3b4.firebaseapp.com",
+  databaseURL: "https://madproject-2c3b4.firebaseio.com",
+  projectId: "madproject-2c3b4",
+  storageBucket: "madproject-2c3b4.appspot.com",
+  messagingSenderId: "445214233554"
 };
 firebase.initializeApp(config);
 var uid;
-var ref = firebase.database().ref('users');
+var ref = firebase.database().ref('users/'+uid);
+var refStorage = firebase.storage().ref('users/');
+var url;
+
+
+
+
+
+function handleFileSelect(evt) {
+        evt.stopPropagation();
+        evt.preventDefault();
+        var file = evt.target.files[0];
+
+        var metadata = {
+          'contentType': file.type
+        };
+
+        // Push to child path.
+        // [START oncomplete]
+        refStorage.child(uid + '/' + file.name).put(file, metadata).then(function(snapshot) {
+          url = snapshot.downloadURL;
+          console.log('File available at', url);
+          
+        }).catch(function(error) {
+          // [START onfailure]
+          console.error('Upload failed:', error);
+          console.log(uid)
+          // [END onfailure]
+        });
+        // [END oncomplete]
+      }
+
+        document.getElementById('file').addEventListener('change', handleFileSelect, false);
+        document.getElementById('file').disabled = true;
+      
+
+
+
+
+
 
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     //User is signed in.
     profilePhoto = user.photoURL;
     uid = user.uid;
+    var ref = firebase.database().ref('users/'+uid);
+
     if(user.displayName !== null){
       $('#formNameInput').attr('value', user.displayName);
     }
     if(profilePhoto === null){
       $('#profileImage').attr('src', 'assets/images/defaultProfilePhoto.png')
+      $('#updateImage').attr('src', 'assets/images/defaultProfilePhoto.png')
     }
     //Checking for user information and loading it on the page
-    ref.child(uid).on('child_added', function(snapshot){
+    ref.on('child_added', function(snapshot){
       if(snapshot.val().bio === undefined || snapshot.val().bio === ""){
         $('#formBioTextarea').attr('placeholder', "Tell us a little bit about yourself");
       }
       else {
         $('#formBioTextarea').html(snapshot.val().bio)
       }
+      
     });
     //Makes changes to profile
     $('#updateProfileBtn').on('click', function(){
@@ -47,6 +90,9 @@ firebase.auth().onAuthStateChanged(function(user) {
       })
       ref.child(uid).update(profile); //This updates the users profile that we handle through firebase
     })
+    document.getElementById('file').disabled = false;
+    
+    
   } else {
     // No user is signed in.
     window.location = 'index.html';
