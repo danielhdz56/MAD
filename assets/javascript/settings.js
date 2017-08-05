@@ -17,7 +17,27 @@ var url;
 
 
 
-function handleFileSelect(evt) {
+
+      
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    //User is signed in.
+    profilePhoto = user.photoURL;
+    uid = user.uid;
+    var ref = firebase.database().ref('users/'+uid);
+
+    if(user.displayName !== null){
+      $('#formNameInput').attr('value', user.displayName);
+    }
+    if(profilePhoto === null){
+      $('#profileImage').attr('src', 'assets/images/defaultProfilePhoto.png');
+      $('#updateImage').attr('src', 'assets/images/defaultProfilePhoto.png');
+    }
+    else{
+      $('#profileImage').attr('src', profilePhoto);
+      $('#updateImage').attr('src', profilePhoto);
+    }
+    function handleFileSelect(evt) {
         evt.stopPropagation();
         evt.preventDefault();
         var file = evt.target.files[0];
@@ -30,8 +50,15 @@ function handleFileSelect(evt) {
         // [START oncomplete]
         refStorage.child(uid + '/' + file.name).put(file, metadata).then(function(snapshot) {
           url = snapshot.downloadURL;
-          console.log('File available at', url);
-          
+          var profile = {
+            image: {
+              img: url
+            }
+          }
+          ref.update(profile); //This updates the users profile that we handle through firebase
+          user.updateProfile({ //This updates the actual user data that google handles through their server
+            photoURL: url
+          })
         }).catch(function(error) {
           // [START onfailure]
           console.error('Upload failed:', error);
@@ -40,30 +67,8 @@ function handleFileSelect(evt) {
         });
         // [END oncomplete]
       }
-
         document.getElementById('file').addEventListener('change', handleFileSelect, false);
         document.getElementById('file').disabled = true;
-      
-
-
-
-
-
-
-firebase.auth().onAuthStateChanged(function(user) {
-  if (user) {
-    //User is signed in.
-    profilePhoto = user.photoURL;
-    uid = user.uid;
-    var ref = firebase.database().ref('users/'+uid);
-
-    if(user.displayName !== null){
-      $('#formNameInput').attr('value', user.displayName);
-    }
-    if(profilePhoto === null){
-      $('#profileImage').attr('src', 'assets/images/defaultProfilePhoto.png')
-      $('#updateImage').attr('src', 'assets/images/defaultProfilePhoto.png')
-    }
     //Checking for user information and loading it on the page
     ref.on('child_added', function(snapshot){
       if(snapshot.val().bio === undefined || snapshot.val().bio === ""){
@@ -72,8 +77,15 @@ firebase.auth().onAuthStateChanged(function(user) {
       else {
         $('#formBioTextarea').html(snapshot.val().bio)
       }
-      
+      if(snapshot.val().img){
+        profilePhoto = snapshot.val().img;
+      }
     });
+    ref.on('child_changed', function(snapshot){
+      profilePhoto = snapshot.val();
+      $('#profileImage').attr('src', profilePhoto.img);
+      $('#updateImage').attr('src', profilePhoto.img);
+    })
     //Makes changes to profile
     $('#updateProfileBtn').on('click', function(){
       event.preventDefault();
@@ -86,9 +98,9 @@ firebase.auth().onAuthStateChanged(function(user) {
         }
       };
       user.updateProfile({ //This updates the actual user data that google handles through their server
-        displayName: name,
+        displayName: name
       })
-      ref.child(uid).update(profile); //This updates the users profile that we handle through firebase
+      ref.update(profile); //This updates the users profile that we handle through firebase
     })
     document.getElementById('file').disabled = false;
     
