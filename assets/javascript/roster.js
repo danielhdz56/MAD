@@ -7,7 +7,6 @@ var config = {
   storageBucket: "madproject-2c3b4.appspot.com",
   messagingSenderId: "445214233554"
 };
-firebase.initializeApp(config);
 var name, email, photoUrl, uid, emailVerified;
 var ref;
 firebase.auth().onAuthStateChanged(function(user) {
