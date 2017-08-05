@@ -1,16 +1,15 @@
 // Initialize Firebase
 var config = {
-apiKey: "AIzaSyAJNS71JJNa_k3bKMuSS-SqUeHRFik_8QE",
-authDomain: "madproject-2c3b4.firebaseapp.com",
-databaseURL: "https://madproject-2c3b4.firebaseio.com",
-projectId: "madproject-2c3b4",
-storageBucket: "madproject-2c3b4.appspot.com",
-messagingSenderId: "445214233554"
+  apiKey: "AIzaSyAJNS71JJNa_k3bKMuSS-SqUeHRFik_8QE",
+  authDomain: "madproject-2c3b4.firebaseapp.com",
+  databaseURL: "https://madproject-2c3b4.firebaseio.com",
+  projectId: "madproject-2c3b4",
+  storageBucket: "madproject-2c3b4.appspot.com",
+  messagingSenderId: "445214233554"
 };
+
 firebase.initializeApp(config);
 var name, email, photoUrl, uid, emailVerified;
-
-
 
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
