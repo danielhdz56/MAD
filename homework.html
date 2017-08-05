@@ -3,10 +3,10 @@
 <head>
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>MAD Dashboard</title>
+	<title>MAD Homework</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
   <link rel="stylesheet" href="assets/css/main.css">
-  <link rel="stylesheet" href="assets/css/roster.css">
+  <link rel="stylesheet" href="assets/css/homework.css">
 
 </head>
 <body>
@@ -15,7 +15,6 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <a class="navbar-brand" href="home.html">MAD</a>
-
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
@@ -55,75 +54,39 @@
 
         <ul class="nav nav-pills flex-column">
           <li class="nav-item">
-            <a class="nav-link active" href="roster.html">Roster<span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="roster.html">Roster</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="homework.html">Homework</a>
+            <a class="nav-link active" href="homework.html">Homework<span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Reminders</a>
           </li>
         </ul>
       </nav>
-
       <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-        <h1>Class Roster</h1>
+        <h1>Homework</h1>
         <div class="row mb-4">
           <div class="col-12 col-sm-6 col-md-4 offset-md-1">
-            <div class="card bg-coral" data-toggle="modal" data-target="#addClassModal">
-              <div class="card-block">
-                <h4 class="card-title">Add a Class</h4>
-                <h6 class="card-subtitle mb-2">We love excel</h6>
-              </div>
-            </div>
-            <!-- Modal -->
-            <div class="modal fade" id="addClassModal" tabindex="-1" role="dialog" aria-labelledby="addClassModallLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Choose a CSV File to upload.</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                      <input type="file" id="files">
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button id="parseBtn" type="button" class="btn btn-primary">Add Class</button>
-                  </div>
-                </div>
+            <div id="inputFileDiv" class="card bg-coral">
+              <input type="file" id="file" name="file" accept="application/msword,application/vnd.ms-excel,application/vnd.ms-powerpoint,text/plain,application/pdf" multiple/>
+              <div id="uploadFileBtn" class="card-block">
+                <h4 class="card-title">Add File</h4>
+                <h6 class="card-subtitle mb-2">PDFs and Docs</h6>
               </div>
             </div>
           </div>
           <div class="col-12 col-sm-6 col-md-4 offset-md-1">
             <div class="card bg-coral">
               <div class="card-block">
-                <h4 class="card-title">Attendance</h4>
-                <h6 class="card-subtitle mb-2">Is just a tap away</h6>
+                <h4 class="card-title">Placeholder</h4>
+                <h6 class="card-subtitle mb-2">Placeholder</h6>
               </div>
             </div>
           </div>
         </div>
-        <h2>Roster</h2>
-        <div class="table-responsive">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Period</th>
-                <th>Grade</th>
-                <th>Homework</th>
-                <th>Messages</th>
-              </tr>
-            </thead>
-            <tbody id="roster-body">
-             
-            </tbody>
-          </table>
-        </div>
+        <h2>Files</h2>
+        
       </main>
     </div>
   </div>
@@ -135,7 +98,7 @@
   <script src="assets/javascript/papaparse.min.js"></script>
   <script src="assets/javascript/rosterParser.js"></script>
   <script src="assets/javascript/main.js"></script>
-  <script src="assets/javascript/roster.js"></script>
+  <script src="assets/javascript/homework.js"></script>
   <script src="assets/javascript/ie10-viewport-bug-workaround.js"></script>
 </body>
 </html>
