@@ -21,8 +21,18 @@ firebase.auth().onAuthStateChanged(function(user) {
       };
       return new Promise(function (resolve, reject) {
         refStorage.child(uid + '/homework/' + docFile.name).put(docFile, metadata).then(function(snapshot) {
-          url = snapshot.downloadURL;
-          refHomework.push(url); //This updates the users profile that we handle through firebase
+          homeworkMetaData = snapshot.metadata;
+          console.log(homeworkMetaData)
+          dataObject = {
+            url: snapshot.downloadURL,
+            name: homeworkMetaData.name,
+            size: homeworkMetaData.size,
+            timeCreated: homeworkMetaData.timeCreated,
+            type: homeworkMetaData.type,
+            updated: homeworkMetaData.updated,
+            generation: homeworkMetaData.generation
+          }
+          refHomework.push(dataObject); //This updates the users profile that we handle through firebase
         }).catch(function(error) {
           // [START onfailure]
           console.error('Upload failed:', error);
@@ -32,6 +42,12 @@ firebase.auth().onAuthStateChanged(function(user) {
         // [END oncomplete]
       })
     }
+    refHomework.on('child_added', function(snapshot){
+      var downloadHomework = $('<li>');
+      downloadHomework.append('<a href="' + snapshot.val().url + '">hello</a>');
+      $('#fileView ul').append(downloadHomework);
+
+    })
   } else {
     // No user is signed in.
     window.location = 'index.html';
