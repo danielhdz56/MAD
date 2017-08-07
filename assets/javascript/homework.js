@@ -21,8 +21,18 @@ firebase.auth().onAuthStateChanged(function(user) {
       };
       return new Promise(function (resolve, reject) {
         refStorage.child(uid + '/homework/' + docFile.name).put(docFile, metadata).then(function(snapshot) {
-          url = snapshot.downloadURL;
-          refHomework.push(url); //This updates the users profile that we handle through firebase
+          homeworkMetaData = snapshot.metadata;
+          console.log(homeworkMetaData)
+          dataObject = {
+            url: snapshot.downloadURL,
+            name: homeworkMetaData.name,
+            size: homeworkMetaData.size,
+            timeCreated: homeworkMetaData.timeCreated,
+            type: homeworkMetaData.type,
+            updated: homeworkMetaData.updated,
+            generation: homeworkMetaData.generation
+          }
+          refHomework.push(dataObject); //This updates the users profile that we handle through firebase
         }).catch(function(error) {
           // [START onfailure]
           console.error('Upload failed:', error);
@@ -32,6 +42,46 @@ firebase.auth().onAuthStateChanged(function(user) {
         // [END oncomplete]
       })
     }
+    refHomework.on('child_added', function(snapshot){
+      var storage = firebase.storage();
+      var hw = snapshot.val();
+      var downloadHomework = $('<div>');
+      var date = moment(hw.updated).format('MMMM Do, YYYY');
+      var httpReference = storage.refFromURL(hw.url);
+      var downURL;
+      // Get the download URL
+      httpReference.getDownloadURL().then(function(url) {
+        // Insert url into an <img> tag to "download"
+        downURL = url
+        downloadHomework.addClass('col-lg-6 mb-3').append('<div class="card"><div class="card-block"><h6 class="card-title">' + hw.name + '</h6><p class="card-text">' + date + '</p><a class="btn btn-primary" href="' + hw.url + '">Open</a><a class="btn btn-success mx-2" href="' + downURL + '" download>Download</a><a href="" class="btn btn-warning">Message</a></div></div>')
+        $('#fileView').append(downloadHomework);
+      }).catch(function(error) {
+
+        // A full list of error codes is available at
+        // https://firebase.google.com/docs/storage/web/handle-errors
+        switch (error.code) {
+          case 'storage/object_not_found':
+            // File doesn't exist
+            break;
+
+          case 'storage/unauthorized':
+            // User doesn't have permission to access the object
+            break;
+
+          case 'storage/canceled':
+            // User canceled the upload
+            break;
+
+          //
+
+          case 'storage/unknown':
+            // Unknown error occurred, inspect the server response
+            break;
+        }
+      });
+
+
+    })
   } else {
     // No user is signed in.
     window.location = 'index.html';
