@@ -1,0 +1,22 @@
+.bg-coral{
+	background: #ff5e62;
+	color: whitesmoke;
+}
+.bg-coral .card-subtitle {
+	color: lightgreen;
+}
+
+
+#formMessage {
+	
+	display: none;
+}
+
+#messageHolder{
+	display: none;
+}
+@media screen and (max-width: 575px) {
+	.col-12 {
+    	margin-bottom: 2rem;
+    }
+}
