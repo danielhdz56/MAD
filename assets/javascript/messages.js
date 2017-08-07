@@ -105,7 +105,10 @@ firebase.auth().onAuthStateChanged(function(user) {
                 var lineTwo = childData.subject;
                 var lineThree = childData.message;
                 console.log(childData.message);
-                $("#sentMessages").prepend('<div class="card cardStack"><div class="card-block"><h6 id="outID" class="card-title"></h6><h6 id="outID" class="card-title">'+selection+'</h6><h6 id="outSubject" class="card-subtitle mb-2 text-muted">Subject: '+lineTwo+'</h6><p id="outMessage" class="card-text">'+lineThree+'</p></div></div></div><br>');
+                $("#sentMessages").prepend('<div class="card cardStack"><div class="card-block">' +
+                  '<h6 id="outID" class="card-title">'+selection+'</h6>' +
+                  '<h6 id="outSubject" class="card-subtitle mb-2 text-muted">Subject: '+lineTwo+'</h6>' +
+                  '<p id="outMessage" class="card-text">'+lineThree+'</p></div></div></div><br>');
                 $(".card.cardStack").on("click", function(){
                  console.log("hi");
                 $(this).remove();
