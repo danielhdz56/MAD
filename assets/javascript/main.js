@@ -28,6 +28,11 @@ firebase.auth().onAuthStateChanged(function(user) {
     else{
       $('#profileImage').attr('src', profilePhoto);
     }
+    $('#signOut').on('click', function(){
+      firebase.auth().signOut();
+
+    })
+   
   } else {
     // No user is signed in.
     window.location = 'index.html';
