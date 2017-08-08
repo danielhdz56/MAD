@@ -5,18 +5,14 @@
 .bg-coral .card-subtitle {
 	color: lightgreen;
 }
-
-
 #formMessage {
-	
 	display: none;
 }
-
 #messageHolder{
 	display: none;
 }
 @media screen and (max-width: 575px) {
-	.col-12 {
+	div.col-12 {
     	margin-bottom: 2rem;
     }
 }
