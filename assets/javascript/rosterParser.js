@@ -166,7 +166,6 @@ function completeFn(results)
 	dataToSend = {
 		roster: dataToSend
 	}
-	
 	ref.update(dataToSend);
 	// icky hack
 	setTimeout(enableButton, 100);
