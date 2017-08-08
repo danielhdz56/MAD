@@ -15,7 +15,6 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <a class="navbar-brand" href="home.html">MAD</a>
-
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
@@ -26,10 +25,6 @@
         </li>
       </ul>
       <button id="signOut" class="btn btn-outline-danger my-2 my-sm-0" type="button">SignOut</button>
-      <!-- <form class="form-inline mt-2 mt-md-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form> -->
     </div>
   </nav>
 
@@ -47,7 +42,6 @@
             <a class="nav-link" href="messages.html">Messages</a>
           </li>
         </ul>
-
         <ul class="nav nav-pills flex-column">
           <li class="nav-item">
             <a class="nav-link active" href="roster.html">Roster<span class="sr-only">(current)</span></a>
@@ -57,7 +51,21 @@
           </li>
         </ul>
       </nav>
-
+      <!--Nav that shows up on small devices -->
+      <header class="col-12 hidden-sm-up bg-inverse">
+        <ul class="nav justify-content-center">
+          <li class="nav-item">
+            <a class="nav-link" href="home.html">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="messages.html">Messages</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="homework.html">Homework</a>
+          </li>
+        </ul>
+      </header>
+      <!--Main Content-->
       <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
         <h1>Class Roster</h1>
         <div class="row mb-4">
@@ -91,7 +99,7 @@
           </div>
           
           <div class="col-12 col-sm-6 col-md-6">
-            <div class="card bg-coral">
+            <div id="attendance" class="card bg-coral">
               <div class="card-block">
                 <h4 class="card-title">Attendance</h4>
                 <h6 class="card-subtitle mb-2">Is just a tap away</h6>
@@ -103,13 +111,13 @@
         <div class="table-responsive">
           <table class="table table-striped">
             <thead>
-              <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Period</th>
-                <th>Grade</th>
-                <th>Homework</th>
-                <th>Messages</th>
+              <tr id="roster">
+                <th id="tableID">ID</th>
+                <th id="tableName">Name</th>
+                <th id="tablePeriod">Period</th>
+                <th id="tableGrade">Grade</th>
+                <th id="tableHomework">Homework</th>
+                <th id="tableMessages">Messages</th>
               </tr>
             </thead>
             <tbody id="roster-body">
