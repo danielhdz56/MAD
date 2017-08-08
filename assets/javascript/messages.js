@@ -13,10 +13,8 @@ var updateNum = {};       //used for updating the number of messages
 var messageNum = "";      //
 var name, email, photoUrl, uid, emailVerified;
 var ref;
-
 //Kind of confusing Messages is the key for the number of messages the student currently has
 //Message is the key for the messages.  I'm going to rename them if i get a chance.
-
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     //User is signed in.
@@ -31,10 +29,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     var refMessagesList = firebase.database().ref('users/'+uid+'/messages/')
     refMessagesList.on('child_added', function(snapshot){
       console.log(snapshot.val())
-
     })
-
-
     //This section adds all the students into the dropdown selection
     refRoster.on('child_added', function(snapshot, prevChildKey){
       student = snapshot.val();   //student object
