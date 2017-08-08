@@ -1,10 +1,3 @@
-.bg-coral{
-	background: #ff5e62;
-	color: whitesmoke;
-}
-.bg-coral .card-subtitle {
-	color: lightgreen;
-}
 @media screen and (max-width: 575px){
 	div.col-12{
 		margin-bottom: 2rem;
