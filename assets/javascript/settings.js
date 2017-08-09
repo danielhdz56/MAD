@@ -105,8 +105,10 @@ firebase.auth().onAuthStateChanged(function(user) {
       ref.update(profile); //This updates the users profile that we handle through firebase
     })
     document.getElementById('file').disabled = false;
-    
-    
+    //Handles sign out
+    $('#signOut').on('click', function(){
+      firebase.auth().signOut();
+    });
   } else {
     // No user is signed in.
     window.location = 'index.html';
