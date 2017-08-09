@@ -164,7 +164,6 @@ firebase.auth().onAuthStateChanged(function(user) {
         tableRow.append('<td class="studentMessages text-center">' + student.Messages + '</td>');
       }
       function tableHeadClick(){
-
         //This removes all the table rows
         $('.studentID, .studentName, .studentPeriod, .studentGrade, .studentHomework, .studentMessages').parent().remove();
         var orderBy;

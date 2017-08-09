@@ -7,6 +7,7 @@ var config = {
   storageBucket: "madproject-2c3b4.appspot.com",
   messagingSenderId: "445214233554"
 };
+var signUpPressed = false;
 firebase.initializeApp(config);
 
     /**
@@ -78,6 +79,7 @@ firebase.initializeApp(config);
         // [END_EXCLUDE]
       });
       // [END createwithemail]
+      signUpPressed = true;
     }
     /**
      * Sends an email verification to the user.
@@ -128,10 +130,12 @@ firebase.initializeApp(config);
         // document.getElementById('quickstart-verify-email').disabled = true;
         // [END_EXCLUDE]
         if (user) {
-          console.log('hello')
-          console.log(user)
-          window.location = 'home.html';
-
+          if(signUpPressed){
+            window.location = 'settings.html'
+          }
+          else{
+            window.location = 'home.html';
+          }
           // User is signed in.
           // var displayName = user.displayName;
           // var email = user.email;
