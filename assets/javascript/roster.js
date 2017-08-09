@@ -19,18 +19,10 @@ firebase.auth().onAuthStateChanged(function(user) {
     todayDate = new Date();
     ref = firebase.database().ref('users/'+uid);
     var refRoster = firebase.database().ref('users/'+uid+'/roster');
-    var refAttendance = firebase.database().ref('users/'+uid+'/attendance/'+todayDate)
+    var refAttendance = firebase.database().ref('users/'+uid+'/attendance/'+todayDate);
     //Firebase to run after all childs have been added
     refRoster.on('child_added', function(snapshot, prevChildKey){
-      var tableRow = $('<tr>');
-      $('#roster-body').append(tableRow);
-      var student = snapshot.val();
-      tableRow.append('<td class="studentID">' + student.ID + '</td>');
-      tableRow.append('<td class="studentName">' + student.Student + '</td>');
-      tableRow.append('<td class="studentPeriod text-center">' + student.Period + '</td>');
-      tableRow.append('<td class="studentGrade text-center">' + student.Grade + '</td>');
-      tableRow.append('<td class="studentHomework text-center">' + student.Homework + '</td>');
-      tableRow.append('<td class="studentMessages text-center">' + student.Messages + '</td>');
+      displayRoster(snapshot, true);
     });
     $('#attendance').on('click', function(event){
       event.preventDefault();
@@ -98,6 +90,41 @@ firebase.auth().onAuthStateChanged(function(user) {
         $(attendance).find('h6').text('Is just a tap away');
       }
     })
+    $('th').on('click', function(event){
+      event.preventDefault();
+      $('.studentID, .studentName, .studentPeriod, .studentGrade, .studentHomework, .studentMessages').remove();
+      var orderBy;
+      if($(this).attr('data-order')==='firstLast'){
+        $(this).attr('data-order', 'lastFirst');
+        orderBy = $(this).attr('data-firebase');
+        firebase.database().ref('/users/'+uid+'/roster').orderByChild(orderBy).on('child_added', function(snapshot, prevChildKey){
+          displayRoster(snapshot, true);
+        });       
+      }
+      else{
+        $(this).attr('data-order', 'firstLast');
+        orderBy = $(this).attr('data-firebase');
+        firebase.database().ref('/users/'+uid+'/roster').orderByChild(orderBy).on('child_added', function(snapshot, prevChildKey){
+          displayRoster(snapshot, false);
+        });  
+      }
+    });
+    function displayRoster(snapshot, append) {
+      var tableRow = $('<tr>');
+      if(append){
+        $('#roster-body').append(tableRow);
+      }
+      else{
+        $('#roster-body').prepend(tableRow);
+      }
+      var student = snapshot.val();
+      tableRow.append('<td class="studentID">' + student.ID + '</td>');
+      tableRow.append('<td class="studentName">' + student.Student + '</td>');
+      tableRow.append('<td class="studentPeriod text-center">' + student.Period + '</td>');
+      tableRow.append('<td class="studentGrade text-center">' + student.Grade + '</td>');
+      tableRow.append('<td class="studentHomework text-center">' + student.Homework + '</td>');
+      tableRow.append('<td class="studentMessages text-center">' + student.Messages + '</td>');
+    }
   } else {
     // No user is signed in.
     window.location = 'index.html';

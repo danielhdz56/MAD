@@ -97,7 +97,6 @@
               </div>
             </div>
           </div>
-          
           <div class="col-12 col-sm-6 col-md-6">
             <div id="attendance" data-toggled="on" class="card bg-coral">
               <div class="card-block">
@@ -112,12 +111,12 @@
           <table class="table table-striped">
             <thead>
               <tr id="roster">
-                <th id="tableID">ID</th>
-                <th id="tableName">Name</th>
-                <th id="tablePeriod" class="text-center">Period</th>
-                <th id="tableGrade" class="text-center">Grade</th>
-                <th id="tableHomework" class="text-center">Homework</th>
-                <th id="tableMessages" class="text-center">Messages</th>
+                <th id="tableID" data-order="lastFirst" data-firebase="ID">ID</th>
+                <th id="tableName" data-order="firstLast" data-firebase="Student">Name</th>
+                <th id="tablePeriod" data-order="firstLast" data-firebase="Period" class="text-center">Period</th>
+                <th id="tableGrade" data-order="firstLast" data-firebase="Grade" class="text-center">Grade</th>
+                <th id="tableHomework" data-order="firstLast" data-firebase="Homework" class="text-center">Homework</th>
+                <th id="tableMessages" data-order="firstLast" data-firebase="Messages" class="text-center">Messages</th>
               </tr>
             </thead>
             <tbody id="roster-body">
