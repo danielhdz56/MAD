@@ -53,7 +53,7 @@ firebase.auth().onAuthStateChanged(function(user) {
       httpReference.getDownloadURL().then(function(url) {
         // Insert url into an <img> tag to "download"
         downURL = url
-        downloadHomework.addClass('col-lg-6 mb-3').append('<div class="card"><div class="card-block"><h6 class="card-title">' + hw.name + '</h6><p class="card-text">' + date + '</p><a class="btn btn-primary" href="' + hw.url + '">Open</a><a class="btn btn-success mx-2" href="' + downURL + '" download>Download</a><a href="" class="btn btn-warning">Message</a></div></div>')
+        downloadHomework.addClass('col-lg-6 mb-3').append('<div class="card"><div class="card-block"><h6 class="card-title">' + hw.name + '</h6><p class="card-text">' + date + '</p><a class="btn bg-coral" href="' + hw.url + '">Open</a><a class="btn bg-lightGreen mx-2" href="' + downURL + '" download>Download</a><a href="" class="btn btn-warning">Message</a></div></div>')
         $('#fileView').append(downloadHomework);
       }).catch(function(error) {
 
