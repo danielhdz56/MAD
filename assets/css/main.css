@@ -107,5 +107,28 @@ th {
 .table-striped tbody tr:nth-of-type(odd) {
   background: white;
 }
+.nav-pills .nav-item.show .nav-link, .nav-pills .nav-link.active {
+  background: #ff5e62;
+  color: whitesmoke;
+  cursor: pointer;
+}
+header a {
+  color: white;
+}
+header a:hover {
+  color: lightgreen;
+}
+a{
+  color: #ff5e62;
+}
+a:hover {
+  color: lightgreen;
+}
+button#signOut{
+  color: #90ee90;
+  background-image: none;
+  background-color: transparent;
+  border-color: #90ee90;
+}
 
 
