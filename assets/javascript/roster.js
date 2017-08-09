@@ -24,15 +24,18 @@ firebase.auth().onAuthStateChanged(function(user) {
     refRoster.on('child_added', function(snapshot, prevChildKey){
       displayRoster(snapshot, true);
     });
+    //When the attendance card is clicked this will run
     $('#attendance').on('click', function(event){
       event.preventDefault();
       if($(this).attr('data-toggled')==='on'){
+        $('th').off('click', tableHeadClick);
         $(this).attr('data-toggled', 'off').removeClass('bg-coral').addClass('bg-lightGreen');
         $(this).find('h4').text('Exit');
         $(this).find('h6').text('Or submit below');
         $('#tableGrade, .studentGrade, #tableHomework, .studentHomework, #tableMessages, .studentMessages').hide();
-        $('#roster').prepend('<th id="tableAttendance">Attendance</th>');
+        $('#roster').prepend('<th class="bg-coral" id="tableAttendance">Attendance</th>');
         $("tbody tr").each(function( index ) {
+          console.log($(this))
           var checkID = $(this).children('.studentID').text();
           students.push(checkID);
           $(this).prepend('<td class="studentAttendance" id="' + checkID + '">'+
@@ -76,10 +79,12 @@ firebase.auth().onAuthStateChanged(function(user) {
           var dataToSend = $.extend(dataToSendChecked, dataToSendUnchecked);
           refAttendance.update(dataToSend);
           //Get rids of attendance
+          $('th').on('click', tableHeadClick);
           hideAttendance('#attendance')
         })
       }
       else{
+        $('th').on('click', tableHeadClick);
         hideAttendance(this);
       }
       function hideAttendance(attendance){
@@ -90,9 +95,11 @@ firebase.auth().onAuthStateChanged(function(user) {
         $(attendance).find('h6').text('Is just a tap away');
       }
     })
-    $('th').on('click', function(event){
-      event.preventDefault();
-      $('.studentID, .studentName, .studentPeriod, .studentGrade, .studentHomework, .studentMessages').remove();
+
+    //This allows me to bind and unbind the click event on the table headers
+    function tableHeadClick(){
+      //This removes all the table rows
+      $('.studentID, .studentName, .studentPeriod, .studentGrade, .studentHomework, .studentMessages').parent().remove();
       var orderBy;
       if($(this).attr('data-order')==='firstLast'){
         $(this).attr('data-order', 'lastFirst');
@@ -108,7 +115,8 @@ firebase.auth().onAuthStateChanged(function(user) {
           displayRoster(snapshot, false);
         });  
       }
-    });
+    }
+    $('th').on('click', tableHeadClick);
     function displayRoster(snapshot, append) {
       var tableRow = $('<tr>');
       if(append){

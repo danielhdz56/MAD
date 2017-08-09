@@ -98,5 +98,14 @@ h1 {
 .bg-lightGreen .card-subtitle {
   color: #e45559;
 }
+th {
+  cursor: pointer;
+}
+.table-striped tbody tr:nth-of-type(even) {
+  background: #e2f5e2;
+}
+.table-striped tbody tr:nth-of-type(odd) {
+  background: white;
+}
 
 
