@@ -3,17 +3,17 @@
 <head>
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>MAD Dashboard</title>
+	<title>Messages</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
   <link rel="stylesheet" href="assets/css/main.css">
   <link rel="stylesheet" href="assets/css/messages.css">
 </head>
 <body>
-  <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+  <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-coral">
     <button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="home.html">MAD</a>
+    <a class="navbar-brand" href="home.html">ChalkBoard</a>
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
@@ -50,7 +50,7 @@
         </ul>
       </nav>
       <!--Nav that shows up on small devices -->
-      <header class="col-12 hidden-sm-up bg-inverse">
+      <header class="col-12 hidden-sm-up bg-coral">
         <ul class="nav justify-content-center">
           <li class="nav-item">
             <a class="nav-link" href="home.html">Dashboard</a>
@@ -102,11 +102,11 @@
               <label for="submitTextArea">Message</label>
               <textarea class="form-control" id="submitTextArea" rows="3"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary" id="button">Submit</button>
+            <button type="submit" class="btn bg-coral" id="button">Submit</button>
           </form>
         </div>
         <!-- Sent Messages section -->
-        <div id="messageHolder">
+        <div id="messageHolder" data-show="hidden">  <!--this was missing -->
           <h4>Sent Messages</h4>
             <div id="formSent" data-show="hidden">
              <form>
@@ -115,9 +115,10 @@
                       <label for="studentSelectSent">Select A Student To Review Sent Messages</label>
                       <select class="form-control" id="studentSelectSent">
                         <!-- <options which have the students are generated here -->
+                        <option>All Messages</option>
                       </select>
                    </div>
-                    <button type="submit" class="btn btn-primary" id="buttonSent">Submit</button>
+                    <button type="submit" class="btn bg-coral" id="buttonSent">Submit</button>
                 </div>
               </form>
             </div> 

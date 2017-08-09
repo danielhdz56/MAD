@@ -16,3 +16,9 @@
     	margin-bottom: 2rem;
     }
 }
+.form-control {
+	background: #e2f5e2;
+}
+.cardStack:nth-of-type(even) {
+  background: #ceffc6;
+}
