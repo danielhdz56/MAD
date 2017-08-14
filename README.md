@@ -10,7 +10,7 @@ Created an app that allows teachers to upload assignments, take attendance, and 
 * Sign-in
   * Directed to the dashboard page
 2. On Roster tab and click on the 'Add a class'
-* Upload csv file, 'roster.csv' provided
+* Upload csv file, [roster](./roster.csv) provided
   * Most schools already have csv files with at least student id's and names
 * Sort data by id, name, messages, etc.
 3. On Roster tab click on 'Take attendance'
@@ -49,18 +49,18 @@ Created an app that allows teachers to upload assignments, take attendance, and 
   * Declared a variable, rows, as the rest of the results array
   * Reduce rows by the particular result of the column and mapped rows into a variable called results
   * Before sending the results to firebase the data is reduced again by the student id
-    ** To keep data shallow
+   * To keep data shallow
   * Data is pushed to firebase
   * Table gets made
 3. Homework: Add a file
   * Uploads are made using the input file type
   * Client uploads an image and said image gets sent to firebase
   * Download
-    ** Firebase generates a specific download url
-    ** Gets set to the on click 'download' button
+    * Firebase generates a specific download url
+    * Gets set to the on click 'download' button
   * View 
-    ** Firebase generates a url to view file
-    ** Gets set to the on click 'view' button
+    * Firebase generates a url to view file
+    * Gets set to the on click 'view' button
 4. Dashboard: Grades
   * Pull grades from each student found in the roster node on firebase database
   * Use google charts api to render a pie chart and filter slider
